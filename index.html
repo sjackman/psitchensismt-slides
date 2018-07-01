@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Shaun D Jackman">
+  <meta name="dcterms.date" content="2018-07-03">
+  <title>Sitka Spruce Mitochondrial Genome Assembly</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="sitka-spruce-mitochondrial-genome-assembly" class="slide level2">
+<h2>Sitka Spruce Mitochondrial Genome Assembly</h2>
+<p>2018-07-03</p>
+<div class="line-block"><strong>Shaun Jackman</strong><br />
+<a href="http://twitter.com/sjackman">@sjackman</a><br />
+<a href="http://sjackman.ca">sjackman.ca</a></div>
+</section>
+<section id="shaun-jackman" class="slide level2">
+<h2>Shaun Jackman</h2>
+<div class="line-block"><a href="http://www.birollab.ca">Birol Bioinformatics Technology Lab</a><br />
+<a href="http://bcgsc.ca">BC Cancer Genome Sciences Centre</a> · Vancouver, Canada<br />
+<a href="http://twitter.com/sjackman">@sjackman</a> · <a href="https://github.com/sjackman">github.com/sjackman</a> · <a href="http://sjackman.ca">sjackman.ca</a><br />
+<img data-src="images/sjackman.jpg" alt="Shaun’s head shot" /></div>
+</section>
+<section class="slide level2">
+
+<figure>
+<img data-src="images/picea-glauca-depth-gc.png" alt="White spruce depth vs percent GC" /><figcaption>White spruce depth vs percent GC</figcaption>
+</figure>
+</section>
+<section id="previous-work" class="slide level2">
+<h2>Previous Work</h2>
+<ul>
+<li>Assembled and published the annotated sequences of<br />
+complete <strong>white spruce plastid</strong> genome<br />
+draft <strong>white spruce mitochondrial</strong> genome<br />
+(Jackman et al. 2015)</li>
+<li>Assembled and published the annotated sequence of<br />
+complete <strong>Sitka spruce plastid</strong> genome<br />
+(Coombe et al. 2016)</li>
+<li>Currently working to assemble and annotate the<br />
+draft <strong>Sitka spruce mitochondrial</strong> genome</li>
+</ul>
+</section>
+<section id="sitka-spruce-plastid" class="slide level2">
+<h2>Sitka Spruce Plastid</h2>
+<ul>
+<li>One lane of Illumina 2x150 HiSeq of 10x GemCode</li>
+<li>One library rather than two:<br />
+Illumina paired-end and mate-pair</li>
+<li>Assemble with <a href="https://github.com/bcgsc/abyss">ABySS</a></li>
+<li>Scaffold with <a href="https://github.com/bcgsc/arcs">ARCS</a> and <a href="https://github.com/warrenlr/LINKS">LINKS</a></li>
+<li>Close gaps with <a href="https://github.com/bcgsc/abyss/tree/master/Sealer">Sealer</a></li>
+<li>Polish with <a href="http://www.broadinstitute.org/software/pilon/%5D">Pilon</a></li>
+<li>Annotate with <a href="http://www.yandell-lab.org/software/maker.html">Maker</a></li>
+<li>Manual annotation of difficult genes</li>
+<li>Complete plastid genome in one contig</li>
+<li>Perfect synteny to white spruce plastid</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="line-block"><img data-src="images/picea-sitchensis-plastid.png" alt="Sitka spruce plastid" class="plain" height="600" /></div>
+</section>
+<section id="sitka-spruce-mitochondrion" class="slide level2">
+<h2>Sitka Spruce Mitochondrion</h2>
+<ul>
+<li>10x Genomics Chromium sequencing</li>
+<li>&gt; 50x mitochondrial coverage in one lane</li>
+<li>12 flowcells of Oxford Nanopore Sequencing</li>
+<li>3x nuclear coverage</li>
+<li>14x mitochondrial coverage</li>
+</ul>
+</section>
+<section id="assembly-strategy" class="slide level2">
+<h2>Assembly Strategy</h2>
+<ul>
+<li>Assemble the Nanopore reads</li>
+<li>Polish the assembly using Chromium reads</li>
+<li>Check for misassemblies using Chromium reads</li>
+</ul>
+</section>
+<section id="nanopore-reads" class="slide level2">
+<h2>Nanopore reads</h2>
+<ul>
+<li>Assemble Nanopore reads using <a href="https://github.com/lh3/miniasm">Miniasm</a></li>
+<li>Polish the assembly using <a href="https://github.com/isovic/racon">Racon</a></li>
+<li>Align reads to the draft assembly<br />
+and separate putative mitochondrial reads</li>
+<li>Assemble mtDNA Nanopore reads using <a href="https://github.com/marbl/canu">Canu</a></li>
+</ul>
+</section>
+<section id="x-genomics-chromium" class="slide level2">
+<h2>10x Genomics Chromium</h2>
+<ul>
+<li>Assemble mtDNA Chromium reads using <a href="https://github.com/rrwick/Unicycler">Unicycler</a><br />
+guided by the Canu assembly</li>
+<li>Align Chromium reads to the assembly</li>
+<li>Check for misassemblies using <a href="https://github.com/bcgsc/tigmint">Tigmint</a></li>
+</ul>
+</section>
+<section id="assembly" class="slide level2">
+<h2>Assembly</h2>
+<ul>
+<li>5.5 Mbp genome assembled in 5 contigs</li>
+<li>3.54 Mbp, 881 kbp, 550 kbp, and 396 kbp</li>
+<li>One 168 kbp circular chromosome</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<figure>
+<img data-src="images/canu-unitigs.png" alt="Nanopore reads assembled with Canu (unitigs)" height="500" /><figcaption>Nanopore reads assembled with Canu (unitigs)</figcaption>
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img data-src="images/canu-contigs.png" alt="Nanopore reads assembled with Canu (contigs)" height="500" /><figcaption>Nanopore reads assembled with Canu (contigs)</figcaption>
+</figure>
+</section>
+<section class="slide level2">
+
+<figure>
+<img data-src="images/unicycler.png" alt="Nanopore and Illumina reads assembled with Unicycler" height="500" /><figcaption>Nanopore and Illumina reads assembled with Unicycler</figcaption>
+</figure>
+</section>
+<section id="annotation" class="slide level2">
+<h2>Annotation</h2>
+<ul>
+<li>Annotate genes using <a href="http://www.yandell-lab.org/software/maker.html">MAKER</a> and <a href="http://www.vicbioinformatics.com/software.prokka.shtml">Prokka</a></li>
+<li>88 ORFs similar to 45 mitochondrial genes<br />
+84 kbp or 1.5% of the genome</li>
+<li>1,058 ORFS ≥ 300 bp<br />
+409 kbp or 7% of the genome</li>
+<li>8 rRNA genes (3 distinct)</li>
+<li>25 tRNA genes (17 distinct)</li>
+<li>10 Type II introns in 9 genes</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<figure>
+<img data-src="images/picea-sitchensis-mitochondrion.png" alt="Genes of Picea sitchensis mitochondrion" class="plain" height="500" /><figcaption>Genes of Picea sitchensis mitochondrion</figcaption>
+</figure>
+</section>
+<section id="future-work" class="slide level2">
+<h2>Future Work</h2>
+<ul>
+<li>Investigate genome structure<br />
+and possible genomic isomers</li>
+<li>Validate genome structure with PCR</li>
+<li>Quantify expression using Nanopore RNA-seq</li>
+</ul>
+</section>
+<section id="shaun-jackman-1" class="slide level2">
+<h2>Shaun Jackman</h2>
+<div class="line-block"><a href="http://www.birollab.ca">Birol Bioinformatics Technology Lab</a><br />
+<a href="http://bcgsc.ca">BC Cancer Genome Sciences Centre</a> · Vancouver, Canada<br />
+<a href="http://twitter.com/sjackman">@sjackman</a> · <a href="https://github.com/sjackman">github.com/sjackman</a> · <a href="http://sjackman.ca">sjackman.ca</a></div>
+<p><strong>Slides</strong><br />
+<a href="https://sjackman.ca/psitchensismt-slides" class="uri">https://sjackman.ca/psitchensismt-slides</a></p>
+<p><strong>Markdown source code</strong><br />
+<a href="https://github.com/sjackman/psitchensismt-slides">https://github.com/sjackman/<br />
+psitchensismt-slides</a></p>
+</section>
+<section><section id="supplementary-slides" class="title-slide slide level1"><h1>Supplementary Slides</h1></section><section class="slide level2">
+
+<figure>
+<img data-src="images/unicycler-rainbow.png" alt="Nanopore and Illumina reads assembled with Unicycler" height="500" /><figcaption>Nanopore and Illumina reads assembled with Unicycler</figcaption>
+</figure>
+</section><section id="gc-skew" class="slide level2">
+<h2>GC skew</h2>
+<div class="line-block"><img data-src="images/gc-skew.png" alt="GC skew" /></div>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
